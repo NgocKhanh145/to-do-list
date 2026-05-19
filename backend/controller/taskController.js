@@ -49,3 +49,22 @@ exports.addTask = async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 };
+
+exports.updateTask = async (req, res) => {
+    const { id } = req.params;
+    const { title, status } = req.body;
+
+    try {
+        const [result] = await db.query("UPDATE tasks SET title = ?, status = ? WHERE id = ?", [title, status, id]);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: "Task not found" });
+        }
+
+        res.json({ message: "Task updated successfully" });
+    }
+    catch (err) {
+        console.error("Error updating task:", err);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
