@@ -7,4 +7,4 @@ $ git log --oneline
 # 3274cdf Merge branch 'main' of https://github.com/NgocKhanh145/to-do-list into feat/backend
 # 0fc2241 xóa BE
 
-$ git reset 52622bd
+$ git reset --soft 52622bd
