@@ -1,9 +1,257 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
+		<title>To Do List</title>
+		<style>
+			:root {
+				--bg: #f4f7fb;
+				--card: #ffffff;
+				--primary: #3f72af;
+				--secondary: #112d4e;
+				--accent: #f9c74f;
+				--text: #243b55;
+				--muted: #6c7a92;
+				--border: #d8e2ef;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				margin: 0;
+				font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+				background:
+					radial-gradient(
+						circle at top,
+						rgba(63, 114, 175, 0.14),
+						transparent 42%
+					),
+					var(--bg);
+				color: var(--text);
+			}
+
+			.container {
+				max-width: 960px;
+				margin: 40px auto;
+				padding: 0 20px 40px;
+			}
+
+			.header {
+				text-align: center;
+				margin-bottom: 28px;
+			}
+
+			.header h1 {
+				margin: 0;
+				font-size: 2.4rem;
+				letter-spacing: -0.04em;
+			}
+
+			.header p {
+				color: var(--muted);
+				margin-top: 10px;
+				font-size: 0.98rem;
+			}
+
+			.card {
+				background: var(--card);
+				border: 1px solid var(--border);
+				border-radius: 18px;
+				padding: 28px;
+				box-shadow: 0 20px 60px rgba(34, 59, 86, 0.08);
+			}
+
+			.form-row {
+				display: grid;
+				grid-template-columns: 1fr 1fr 1fr;
+				gap: 16px;
+				align-items: end;
+				margin-bottom: 24px;
+			}
+
+			.form-row label {
+				display: block;
+				font-size: 0.92rem;
+				margin-bottom: 8px;
+				color: var(--secondary);
+			}
+
+			.form-row input,
+			.form-row select {
+				width: 100%;
+				padding: 12px 14px;
+				border-radius: 12px;
+				border: 1px solid var(--border);
+				font-size: 1rem;
+				color: var(--text);
+				background: #f8fbff;
+			}
+
+			.form-row button {
+				grid-column: span 3;
+				background: var(--primary);
+				color: #fff;
+				border: none;
+				border-radius: 14px;
+				padding: 14px;
+				font-size: 1rem;
+				cursor: pointer;
+				transition:
+					transform 0.2s ease,
+					box-shadow 0.2s ease;
+			}
+
+			.form-row button:hover {
+				transform: translateY(-1px);
+				box-shadow: 0 12px 22px rgba(63, 114, 175, 0.18);
+			}
+
+			table {
+				width: 100%;
+				border-collapse: collapse;
+			}
+
+			thead th {
+				text-align: left;
+				padding: 14px 16px;
+				font-size: 0.94rem;
+				text-transform: uppercase;
+				letter-spacing: 0.04em;
+				color: var(--secondary);
+				border-bottom: 1px solid var(--border);
+			}
+
+			tbody tr {
+				border-bottom: 1px solid #e9eff7;
+			}
+
+			tbody td {
+				padding: 16px;
+				vertical-align: middle;
+				font-size: 0.98rem;
+				color: var(--text);
+			}
+
+			tbody td.status {
+				font-weight: 600;
+			}
+
+			.status-badge {
+				display: inline-flex;
+				align-items: center;
+				padding: 8px 12px;
+				border-radius: 999px;
+				font-size: 0.86rem;
+				letter-spacing: 0.02em;
+				background: rgba(63, 114, 175, 0.1);
+				color: var(--primary);
+			}
+
+			.actions {
+				display: flex;
+				gap: 10px;
+			}
+
+			.actions button {
+				border: 1px solid #dbe3f0;
+				background: #ffffff;
+				padding: 10px 14px;
+				border-radius: 12px;
+				font-size: 0.9rem;
+				color: var(--secondary);
+				cursor: pointer;
+			}
+
+			.actions button.delete {
+				border-color: #f4cccc;
+				color: #c94c4c;
+			}
+
+			.actions button:hover {
+				background: #f8fbff;
+			}
+
+			.empty-state {
+				padding: 32px 16px;
+				text-align: center;
+				color: var(--muted);
+			}
+		</style>
 	</head>
-	<body></body>
+	<body>
+		<div class="container">
+			<div class="header">
+				<h1>To Do List</h1>
+				<p>
+					Danh sách công việc với STT, trạng thái, ngày tạo và chức năng thêm /
+					xóa.
+				</p>
+			</div>
+
+			<div class="card">
+				<div class="form-row">
+					<label>
+						Tên công việc
+						<input type="text" placeholder="Nhập tên công việc" />
+					</label>
+					<label>
+						Trạng thái
+						<select>
+							<option value="pending">Chưa hoàn thành</option>
+							<option value="in-progress">Đang làm</option>
+							<option value="done">Hoàn thành</option>
+						</select>
+					</label>
+					<label>
+						Ngày tạo
+						<input type="date" />
+					</label>
+					<button type="button">Thêm công việc</button>
+				</div>
+
+				<table>
+					<thead>
+						<tr>
+							<th>STT</th>
+							<th>Tên công việc</th>
+							<th>Trạng thái</th>
+							<th>Ngày tạo</th>
+							<th>Chức năng</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>Hoàn thiện giao diện</td>
+							<td class="status"><span class="status-badge">Đang làm</span></td>
+							<td>2026-05-19</td>
+							<td>
+								<div class="actions">
+									<button>Chỉnh sửa</button>
+									<button class="delete">Xóa</button>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Viết nội dung nhiệm vụ</td>
+							<td class="status">
+								<span class="status-badge">Chưa hoàn thành</span>
+							</td>
+							<td>2026-05-19</td>
+							<td>
+								<div class="actions">
+									<button>Chỉnh sửa</button>
+									<button class="delete">Xóa</button>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</body>
 </html>
